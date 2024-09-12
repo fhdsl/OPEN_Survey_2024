@@ -61,10 +61,10 @@ jobs:
         id: 'get_sheet'
         uses: jroehl/gsheet.action@v2.1.1
         with:
-          spreadsheetId: ''
+          spreadsheetId: '1nQ8rBzYOmE31eMWMO7r-h-RXMwtSPuwxH6j9fk4FMM4'
           commands: | # list of commands, specified as a valid JSON string
             [
-              { "command": "getWorksheet", "args": { "1nQ8rBzYOmE31eMWMO7r-h-RXMwtSPuwxH6j9fk4FMM4": "Form Responses 1" }},
+              { "command": "getWorksheet", "args": { "worksheetTitle": "Form Responses 1" }},
               { "command": "getData", "args": { "range": "'Form Responses 1'!A:AB" } }
             ]
         env:
