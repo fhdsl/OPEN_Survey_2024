@@ -54,7 +54,7 @@ jobs:
 
       # We want a fresh run of the renders each time - so first delete old html files
       - name: Delete old *.html
-        run: Rscript -e "rmarkdown::clean_site(preview = FALSE)"
+        run: Rscript -e "rmarkdown::clean_site(input = 'pages', preview = FALSE)"
 
        # Now we want to get the data from gsheet, make it available to all of the Rmds and render all the html files from the Rmd files
       - name: get data
