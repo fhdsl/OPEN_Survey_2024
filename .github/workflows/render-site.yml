@@ -69,7 +69,7 @@ jobs:
             ]
         env:
           GSHEET_CLIENT_EMAIL: ${{ secrets.GSHEET_CLIENT_EMAIL }}
-          GSHEET_CLIENT_KEY: ${{ secrets.GSHEET_PRIVATE_KEY }}
+          GSHEET_PRIVATE_KEY: ${{ secrets.GSHEET_PRIVATE_KEY }}
 
         # Run the analysis and Render
       - name: Run render script
