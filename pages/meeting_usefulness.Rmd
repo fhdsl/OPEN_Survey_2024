@@ -1,0 +1,8 @@
+---
+title: Prior Meeting Usefulness
+output: html_document
+---
+
+```{r}
+table(df$HowUsefulMetricminer)
+```

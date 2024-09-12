@@ -1,0 +1,22 @@
+name: Open Survey 2024 Analysis Results
+output_dir: '../docs'
+navbar:
+  title: OPEN Survey 2024
+  left:
+  - text: ""
+    href: index.html
+    icon: fa-home
+  - text: Meeting Usefulness
+    href: meeting_usefulness.html
+
+
+
+output:
+  html_document:
+    theme: cosmo
+    lib_dir: site_libs
+    self_contained: no
+    highlight: textmate
+    css: styles.css
+    includes:
+       in_header: resources/header.html

@@ -100,10 +100,29 @@ jobs:
       - name: Delete old *.html
         run: Rscript -e "rmarkdown::clean_site(preview = FALSE)"
 
-       # Now we want to render all the html files from the Rmd files
-      - name: Run render html
+       # Now we want to get the data from gsheet, make it available to all of the Rmds and render all the html files from the Rmd files
+      - name: get data
+        id: 'get_sheet'
+        uses: jroehl/gsheet.action@v2.1.1
+        with:
+          spreadsheetId: ''
+          commands: | # list of commands, specified as a valid JSON string
+            [
+              { "command": "getWorksheet", "args": { "1nQ8rBzYOmE31eMWMO7r-h-RXMwtSPuwxH6j9fk4FMM4": "Form Responses 1" }},
+              { "command": "getData", "args": { "range": "'Form Responses 1'!A:AB" } }
+            ]
+        env:
+          GSHEET_CLIENT_EMAIL: ${{ secrets.GSHEET_CLIENT_EMAIL }}
+          GSHEET_CLIENT_KEY: ${{ secrets.GSHEET_PRIVATE_KEY }}
+
+        # Run the analysis and Render
+      - name: Run render script
         id: site
-        run: Rscript -e "rmarkdown::render_site()"
+        env:
+          # the output of the action above!
+          RESULTS: ${{ steps.get_sheet.outputs.results }}
+        run: |
+          Rscript --vanilla "resources/render.R" --data_in "$RESULTS"
 
       # This checks on the steps before it and makes sure that they completed.
       # If the renders didn't complete we don't want to commit the file changes
