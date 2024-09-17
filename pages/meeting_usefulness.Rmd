@@ -4,5 +4,32 @@ output: html_document
 ---
 
 ```{r}
-table(df$HowUsefulMetricminer)
+df %>% select(starts_with("HowUseful")) %>%
+    pivot_longer(cols = everything(),
+                 names_to = "WhichMeeting",
+                 values_to = "WhichRating") %>%
+    filter(WhichRating != "Did not attend; time conflict") %>%
+    mutate(WhichRating = recode(WhichRating, "Did not attend; lack of interest" = "0"),
+           WhichRating = as.numeric(WhichRating),
+           MeetingLabel = case_when(WhichMeeting == "HowUsefulOverleaf" ~ "Overleaf",
+                                    WhichMeeting == "HowUsefulITCRToolSoftwareSurvey" ~ "ITCR Tool Usage Survey",
+                                    WhichMeeting == "HowUsefulAIDecisionMakers" ~ "AI for Decision Makers",
+                                    WhichMeeting == "HowUsefulDataTrail" ~ "Data Trail",
+                                    WhichMeeting == "HowUsefulGenAIpt2" ~ "Generative AI pt2",
+                                    WhichMeeting == "HowUsefulMetricminer" ~ "Metricminer",
+                                    WhichMeeting == "HowUsefulUserAcceptance" ~ "User Acceptance Testing",
+                                    WhichMeeting == "HowUsefulAISoftwareDev" ~ "AI for Software Development",
+                                    WhichMeeting == "HowUsefulGenAIpt1" ~ "Generative AI pt1",
+                                    WhichMeeting == "HowUsefulITCRToolTable" ~ "ITCR Tool Table",
+                                    WhichMeeting == "HowUsefulForumCommunities" ~ "Supporting Forums & User Communities")) %>%
+    ggplot(aes(
+        fct_reorder(MeetingLabel, WhichRating),
+        y=WhichRating)) +
+    geom_boxplot(outliers = FALSE) +
+    theme_bw() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    geom_jitter(aes(x=MeetingLabel, y=WhichRating),
+                height=0.1, width=0.3, alpha=0.4) +
+  xlab("") +
+  ylab("Usefulness Rating\n(0: Didn't attend due to lack of interest)")
 ```
