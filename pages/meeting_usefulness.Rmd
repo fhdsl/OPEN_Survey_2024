@@ -5,12 +5,16 @@ output: html_document
 
 # How useful did you find the specified meeting on a scale of 1 to 5?
 
+<details><summary><Click here for definitions of the rating system</summary>
+
 * 5 = very useful
 * 4 = useful
 * 3 = somewhat useful
 * 2 = a bit useful
 * 1 = not useful
 * 0 = did not attend meeting due to lack of interest
+
+</details>
 
 ```{r echo=FALSE, message=FALSE}
 df %>% select(starts_with("HowUseful")) %>%
