@@ -34,15 +34,29 @@ df %>% select(starts_with("HowUseful")) %>%
                                     WhichMeeting == "HowUsefulAISoftwareDev" ~ "AI for Software Development",
                                     WhichMeeting == "HowUsefulGenAIpt1" ~ "Generative AI pt1",
                                     WhichMeeting == "HowUsefulITCRToolTable" ~ "ITCR Tool Table",
-                                    WhichMeeting == "HowUsefulForumCommunities" ~ "Supporting Forums & User Communities")) %>%
+                                    WhichMeeting == "HowUsefulForumCommunities" ~ "Supporting Forums & User Communities"),
+           MeetingAnnot = case_when(MeetingLabel == "Overleaf" ~ "ITN Education Session",
+                                    MeetingLabel == "AI for Software Development" ~ "ITN Education Session",
+                                    MeetingLabel == "AI for Decision Makers" ~ "ITN Education Session",
+                                    MeetingLabel == "Generative AI pt2" ~ "Research Talk",
+                                    MeetingLabel == "Generative AI pt1" ~ "Research Talk",
+                                    MeetingLabel == "ITCR Tool Usage Survey" ~ "Research Activity",
+                                    MeetingLabel == "Data Trail" ~ "Guest Education Session",
+                                    MeetingLabel == "Metricminer" ~ "Software Introduction",
+                                    MeetingLabel == "User Acceptance Testing" ~ "Guest Education Session",
+                                    MeetingLabel == "ITCR Tool Table" ~ "Discussion",
+                                    MeetingLabel == "Supporting Forums & User Communities" ~ "Guest Education Session")) %>%
     ggplot(aes(
         fct_reorder(MeetingLabel, WhichRating),
-        y=WhichRating)) +
+        y=WhichRating,
+        fill = MeetingAnnot)) +
     geom_boxplot(outliers = FALSE) +
     theme_bw() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-    geom_jitter(aes(x=MeetingLabel, y=WhichRating),
-                height=0.1, width=0.3, alpha=0.4) +
+    geom_jitter(aes(x=MeetingLabel, y=WhichRating, fill=MeetingAnnot),
+                height=0.1, width=0.35, alpha=0.4, size=4, shape=21, color="black") +
   xlab("") +
-  ylab("Usefulness Rating\n(0: Didn't attend due to lack of interest)")
+  ylab("") +
+  scale_y_discrete(limits = c(0, 1, 2, 3, 4, 5), labels= c("Didn't attend due to lack of interest", "Not useful", "A bit useful", "Somewhat useful", "Useful", "Very useful")) +
+  labs(fill = NULL)
 ```
