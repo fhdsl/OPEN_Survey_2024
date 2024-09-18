@@ -16,7 +16,7 @@ output: html_document
 
 </details>
 
-```{r echo=FALSE, message=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 df %>% select(starts_with("HowUseful")) %>%
     pivot_longer(cols = everything(),
                  names_to = "WhichMeeting",
