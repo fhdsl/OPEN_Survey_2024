@@ -3,7 +3,7 @@ title: Usefulness
 output: html_document
 ---
 
-# To what extent have you found the OPEN group's activities and discussions to be useful and engaging?
+# Reported extent of engagement with and benefit from the OPEN group's activities and discussions
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 data.frame(table(df$ExtentUsefulEngaging)) %>%
