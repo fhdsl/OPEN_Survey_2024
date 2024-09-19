@@ -56,6 +56,8 @@ print(ncol(df))
 
 df %<>% mutate(Email = str_replace(Email, ".eud", ".edu"))
 
+print(sum(is.na(df$Email)))
+
 tabulatedEmails <- table(df$Email, useNA = "no")
 
 if (sum(tabulatedEmails > 1) > 0) {
@@ -66,6 +68,7 @@ if (sum(tabulatedEmails > 1) > 0) {
       head(
         which(df$Email == duplicatedEmails[x]),-1
       )))
+  print(length(IDXs_to_remove)) # I think it's removing the responses with NAs, wondering how those are encoded
   df <- df[-IDXs_to_remove, ]
 }
 
