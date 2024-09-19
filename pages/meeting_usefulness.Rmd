@@ -1,8 +1,87 @@
 ---
-title: Prior Meeting Usefulness
+title: Usefulness
 output: html_document
 ---
 
-```{r}
-table(df$HowUsefulMetricminer)
+# Usefulness of OPEN
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+data.frame(table(df$ExtentUsefulEngaging)) %>%
+  mutate(Sentiment = if_else(str_detect(Var1, "have not yet"), "No opinion", "Sentiment expressed"),
+         Var1 = str_replace_all(Var1, " - ", "\n"),
+         Var1 = recode(Var1, "I have not yet enanged with OPEN enough to form an opinion" = "I have not yet engaged with OPEN\nenough to form an opinion"),
+         Var1 = factor(Var1, levels = c("I have not yet engaged with OPEN\nenough to form an opinion",
+                                        "Not especially useful or engaging\nI have not found much value yet",
+                                        "Somewhat useful and engaging at times\nThere is occasional benefit for me",
+                                        "Mostly useful and generally engaging\nI usually walk away having learned something",
+                                        "Very useful and highly engaging\nI consistently gain valuable insights"))) %>%
+  ggplot(aes(y=Var1,
+             x=Freq,
+             fill=Sentiment)) +
+  geom_bar(stat="identity") +
+  scale_x_continuous(breaks= pretty_breaks()) +
+  theme_bw() +
+  theme(text = element_text(size = 20)) +
+  xlab("Response Count") +
+  ylab("") +
+  ggtitle("To what extent have you found the OPEN group's\n activities and discussions to be useful and engaging?")
+```
+
+# Specific OPEN meeting usefulness
+
+<details><summary><Click here for definitions of the rating system</summary>
+
+* 5 = very useful
+* 4 = useful
+* 3 = somewhat useful
+* 2 = a bit useful
+* 1 = not useful
+* 0 = did not attend meeting due to lack of interest
+
+</details>
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+df %>% select(starts_with("HowUseful")) %>%
+    pivot_longer(cols = everything(),
+                 names_to = "WhichMeeting",
+                 values_to = "WhichRating") %>%
+    filter(WhichRating != "Did not attend; time conflict") %>%
+    mutate(WhichRating = recode(WhichRating, "Did not attend; lack of interest" = "0"),
+           WhichRating = as.numeric(WhichRating),
+           MeetingLabel = case_when(WhichMeeting == "HowUsefulOverleaf" ~ "Overleaf",
+                                    WhichMeeting == "HowUsefulITCRToolSoftwareSurvey" ~ "ITCR Tool Usage Survey",
+                                    WhichMeeting == "HowUsefulAIDecisionMakers" ~ "AI for Decision Makers",
+                                    WhichMeeting == "HowUsefulDataTrail" ~ "Data Trail",
+                                    WhichMeeting == "HowUsefulGenAIpt2" ~ "Generative AI pt2",
+                                    WhichMeeting == "HowUsefulMetricminer" ~ "Metricminer",
+                                    WhichMeeting == "HowUsefulUserAcceptance" ~ "User Acceptance Testing",
+                                    WhichMeeting == "HowUsefulAISoftwareDev" ~ "AI for Software Development",
+                                    WhichMeeting == "HowUsefulGenAIpt1" ~ "Generative AI pt1",
+                                    WhichMeeting == "HowUsefulITCRToolTable" ~ "ITCR Tool Table",
+                                    WhichMeeting == "HowUsefulForumCommunities" ~ "Supporting Forums & User Communities"),
+           MeetingAnnot = case_when(MeetingLabel == "Overleaf" ~ "ITN Education Session",
+                                    MeetingLabel == "AI for Software Development" ~ "ITN Education Session",
+                                    MeetingLabel == "AI for Decision Makers" ~ "ITN Education Session",
+                                    MeetingLabel == "Generative AI pt2" ~ "Research Talk",
+                                    MeetingLabel == "Generative AI pt1" ~ "Research Talk",
+                                    MeetingLabel == "ITCR Tool Usage Survey" ~ "Research Activity",
+                                    MeetingLabel == "Data Trail" ~ "Guest Education Session",
+                                    MeetingLabel == "Metricminer" ~ "Software Introduction",
+                                    MeetingLabel == "User Acceptance Testing" ~ "Guest Education Session",
+                                    MeetingLabel == "ITCR Tool Table" ~ "Discussion",
+                                    MeetingLabel == "Supporting Forums & User Communities" ~ "Guest Education Session")) %>%
+    ggplot(aes(
+        fct_reorder(MeetingLabel, WhichRating),
+        y=WhichRating,
+        fill = MeetingAnnot)) +
+    geom_boxplot(outliers = FALSE) +
+    theme_bw() +
+    theme(text = element_text(size = 20),
+          axis.text.x = element_text(angle = 45, hjust = 1)) +
+    geom_jitter(aes(x=MeetingLabel, y=WhichRating, fill=MeetingAnnot),
+                height=0.1, width=0.35, alpha=0.4, size=4, shape=21, color="black", stroke=1.5) +
+  xlab("") +
+  ylab("") +
+  scale_y_discrete(limits = c(0, 1, 2, 3, 4, 5), labels= c("Didn't attend due to lack of interest", "Not useful", "A bit useful", "Somewhat useful", "Useful", "Very useful")) +
+  labs(fill = NULL)
 ```
