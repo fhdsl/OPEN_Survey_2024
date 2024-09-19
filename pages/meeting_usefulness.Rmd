@@ -3,6 +3,12 @@ title: Usefulness
 output: html_document
 ---
 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(scales)
+```
+
+
 # Usefulness of OPEN
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
