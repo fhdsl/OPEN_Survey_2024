@@ -34,6 +34,8 @@ colnames(df) <- df[1, ] # colnames taken from first row of data
 df <- df[-1, ] # remove the first row of data (original column names)
 df <- tibble::as_tibble(df)
 
+df[df==""]<-NA #make no responses NAs
+
 print(dim(df))
 
 # --------- Any analysis/tidying you want to do ---------
