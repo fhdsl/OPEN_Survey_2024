@@ -11,10 +11,6 @@ library(scales)
 
 # Usefulness of OPEN
 
-```{r}
-table(df$ExtentUsefulEngaging)
-```
-
 ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width = 14.98, fig.height = 7.29}
 data.frame(table(df$ExtentUsefulEngaging)) %>%
   mutate(Sentiment = if_else(str_detect(Var1, "have not yet"), "No opinion", "Sentiment expressed"),
