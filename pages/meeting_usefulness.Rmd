@@ -11,7 +11,7 @@ library(scales)
 
 # Usefulness of OPEN
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width = "100%"}
 data.frame(table(df$ExtentUsefulEngaging)) %>%
   mutate(Sentiment = if_else(str_detect(Var1, "have not yet"), "No opinion", "Sentiment expressed"),
          Var1 = str_replace_all(Var1, " - ", "\n"),
@@ -35,7 +35,7 @@ data.frame(table(df$ExtentUsefulEngaging)) %>%
 
 # Specific OPEN meeting usefulness
 
-<details><summary><Click here for definitions of the rating system</summary>
+<details><summary>Click here for definitions of the rating system</summary>
 
 * 5 = very useful
 * 4 = useful
@@ -46,7 +46,7 @@ data.frame(table(df$ExtentUsefulEngaging)) %>%
 
 </details>
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width = "100%"}
 df %>% select(starts_with("HowUseful")) %>%
     pivot_longer(cols = everything(),
                  names_to = "WhichMeeting",
