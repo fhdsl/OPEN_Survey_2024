@@ -8,6 +8,8 @@ navbar:
     icon: fa-home
   - text: Meeting Usefulness
     href: meeting_usefulness.html
+  - text: Future Topic Interest
+    href: topic_interest.html
 
 
 
