@@ -1,0 +1,32 @@
+---
+title: Future Meeting Topic Interest
+output: html_document
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+
+# AI Topic Interest
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height = 8.32, fig.width = 8.32}
+df %>% select(InterestCustomAITool, CombinedInterestAIPolicy, CombinedInterestEthicalAI) %>%
+    pivot_longer(everything(), values_to = "whichResponse", names_to = "whichAI") %>%
+    mutate(whichResponse = recode(whichResponse, "yes" = "Yes", "Yes, definitely" = "Yes"),
+           whichResponse = factor(whichResponse, levels = c("Not interested", "Maybe", "Yes")),
+           whichTopic = case_when(whichAI == "InterestCustomAITool" ~ "Tools and infrastructure for building custom AI tools",
+                                  whichAI == "CombinedInterestAIPolicy" ~ "Policy and regulation related to AI",
+                                  whichAI == "CombinedInterestEthicalAI" ~ "Ethical usage and development of AI for scientific research")) %>%
+    group_by(whichResponse, whichTopic) %>%
+    summarize(n = n()) %>%
+    drop_na() %>%
+    ggplot(aes(x = n, y=whichResponse, fill=whichTopic)) +
+    facet_wrap(~whichTopic, nrow=3) +
+    geom_bar(stat = "identity") +
+    theme_bw() +
+    xlab("Response Count") +
+    ylab("") +
+    theme(legend.position = "none", text = element_text(size = 20)) +
+    ggtitle("Would you be interested in\na talk/discussion about...")
+```

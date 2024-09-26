@@ -1,0 +1,15 @@
+---
+title: "**OPEN Survey 2024 Results**"
+output:
+  html_document
+---
+
+<div class = "banner_color">
+Analysis results for the 2024 OPEN Survey  
+</div>
+
+### **About**
+
+This website was created with the OTTR_Template_Website template.
+
+The survey asked questions about ...
