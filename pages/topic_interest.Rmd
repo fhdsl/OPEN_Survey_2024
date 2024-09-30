@@ -31,7 +31,7 @@ df %>% select(InterestCustomAITool, CombinedInterestAIPolicy, CombinedInterestEt
     ggtitle("Would you be interested in\na talk/discussion about...")
 ```
 
-# User provided suggestions
+# Respondent provided suggestions
 
 ```{r eval=FALSE, echo=FALSE, message=FALSE, warning=FALSE, fig.height = , fig.width = }
 
