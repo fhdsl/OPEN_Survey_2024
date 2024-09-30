@@ -33,12 +33,6 @@ df %>% select(InterestCustomAITool, CombinedInterestAIPolicy, CombinedInterestEt
 
 # Respondent provided suggestions
 
-```{r eval=FALSE, echo=FALSE, message=FALSE, warning=FALSE, fig.height = , fig.width = }
-
-
-
-```
-
 # Preferred Meeting Styles
 
 Note: Each respondent could select multiple meeting styles
