@@ -30,3 +30,56 @@ df %>% select(InterestCustomAITool, CombinedInterestAIPolicy, CombinedInterestEt
     theme(legend.position = "none", text = element_text(size = 20)) +
     ggtitle("Would you be interested in\na talk/discussion about...")
 ```
+
+# User provided suggestions
+
+```{r eval=FALSE, echo=FALSE, message=FALSE, warning=FALSE, fig.height = , fig.width = }
+
+
+
+```
+
+# Preferred Meeting Styles
+
+Note: Each respondent could select multiple meeting styles
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width = 14.98, fig.height = 7.38}
+mycolors <- c(
+  "Discussion" = "#F8766D",
+  "Guest Education Session" = "#B79F00",
+  "ITN Education Session" = "#00BA38",
+  "Research Activity" = "#00BFC4",
+  "Research Talk" = "#619CFF",
+  "Software Introduction" = "#F564E3"
+)
+
+df %>%
+    select(Timestamp, StylePref) %>%
+    separate_longer_delim(StylePref, delim = ", ") %>%
+    mutate(n_responses = length(unique(Timestamp))) %>%
+    group_by(StylePref, n_responses) %>%
+    summarize(n = n()) %>%
+    mutate(percentage = n/n_responses*100) %>%
+    arrange(-n) %>%
+    select(StylePref, percentage) %>%
+    mutate(MeetingAnnot = case_when(StylePref == "Guest speaker talks about a course or training resource" ~ "Guest Education Session",
+       StylePref == "Guest speaker about a topic" ~ "Guest Education Session",
+       StylePref == "Multiple guest speakers about a topic" ~ "Guest Education Session",
+                                    StylePref == "Discussions about a topic" ~ "Discussion",
+                                    StylePref == "Co-working on a project like a manuscript" ~ "Research Activity",
+                                    StylePref == "Guest speaker about their research" ~ "Research Talk",
+                                    StylePref == "A new style where we get CliffNote presentations on books of interest" ~ "ITN Education Session",
+                                    StylePref == "A recorded forum for a podcast episode where cancer informatics topics are discussed" ~ "Discussion"),
+       MeetingAnnot = factor(MeetingAnnot, levels = c("Discussion", "Guest Education Session", "ITN Education Session", "Research Activity", "Research Talk", "Software Introduction")),
+       StylePref = recode(StylePref, "A new style where we get CliffNote presentations on books of interest" = "A new style: CliffNote presentations\non books of interest", "A recorded forum for a podcast episode where cancer informatics topics are discussed" = "A recorded forum for a podcast episode\nwhere cancer informatics topics are discussed", "Guest speaker talks about a course or training resource" = "Guest speaker talks about\na course or training resource")) %>%
+    ggplot(aes(x = percentage, y = reorder(StylePref, percentage), fill=MeetingAnnot)) +
+    geom_bar(stat="identity") +
+    xlim(0,100) +
+    xlab("Percentage of responses") +
+    ylab("") +
+    theme_bw() +
+    theme(text = element_text(size = 20)) +
+    scale_fill_manual(values=mycolors)+
+    labs(fill=NULL) +
+    ggtitle("What style of meeting do you prefer?")
+```
