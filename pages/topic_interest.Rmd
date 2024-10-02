@@ -35,7 +35,7 @@ df %>% select(InterestCustomAITool, CombinedInterestAIPolicy, CombinedInterestEt
 
 # Respondent provided suggestions
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width = , fig.height = }
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 userSpecifiedTOI <- df %>% select(TopicsOfInterest) %>%
     mutate(TopicsOfInterest = recode(TopicsOfInterest, "Not sure" = NA_character_)) %>% #change Not sure to NA
     filter(!str_detect(TopicsOfInterest, "but")) %>% #remove not suggestions
