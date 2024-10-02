@@ -10,7 +10,7 @@ library(kableExtra)
 ```
 
 
-# AI Topic Interest
+## AI Topic Interest
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.height = 8.32, fig.width = 8.32}
 df %>% select(InterestCustomAITool, CombinedInterestAIPolicy, CombinedInterestEthicalAI) %>%
@@ -33,7 +33,7 @@ df %>% select(InterestCustomAITool, CombinedInterestAIPolicy, CombinedInterestEt
     ggtitle("Would you be interested in\na talk/discussion about...")
 ```
 
-# Respondent provided suggestions
+## Respondent provided suggestions
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 userSpecifiedTOI <- df %>% select(TopicsOfInterest) %>%
@@ -72,7 +72,31 @@ expanded <- rbind(
 kableExtra::kable(expanded, table.attr = "style='width:20%;'")
 ```
 
-# Preferred Meeting Styles
+## Interest in being a speaker/discussion leader
+
+`r nrow(df %>% select(BeingGuestInterest) %>% mutate(BeingGuestInterest = recode(BeingGuestInterest, "No" = NA_character_)) %>% filter(!is.na(BeingGuestInterest)))` respondents expressed interest in being a speaker/discussion leader for future meetings. The topics that they suggested they could cover include 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+BeingGuest <- df %>% select(BeingGuestInterest) %>% 
+       mutate(BeingGuestInterest = recode(BeingGuestInterest, "No" = NA_character_, "I might be interested in presenting on software quality, and general software development practices topics." = "Software quality and general software development practices", "I would be happy to discuss data provenance and bioinformatic data reproducibility" = "Data provenance and bioinformatic data reproducibility", "Yes, guest discussion leader. I would like to talk about tools and platforms to encourage user engagement, develop tutorials and FAIR content development for long term usage (https://elixir-europe-training.github.io/ELIXIR-TrP-FAIR-training-handbook/)" = "Tools and platforms to encourage user engagement, develop tutorials and FAIR content development for long term usage")) %>%
+       filter(!is.na(BeingGuestInterest))
+
+kableExtra::kable(BeingGuest, table.attr = "style='width:20%;'")
+```
+
+## Speaker/Discussion leader recommendations
+
+> Do you have recommendations of other speakers/discussion leaders you think would be great for an OPEN meeting? 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+speakerRec <- df %>% mutate(SpeakerRecs = recode(SpeakerRecs, "No" = NA_character_)) %>% select(SpeakerRecs) %>% drop_na()
+
+kableExtra::kable(speakerRec, table.attr = "style='width:20%;'")
+```
+
+["Dr. Kawamoto directs the University’s ReImagine EHR initiative, which is a multi-stakeholder enterprise initiative for improving health and health care through interoperable electronic health record (EHR) innovations"](https://medicine.utah.edu/faculty/kensaku-kawamoto)
+
+## Preferred Meeting Styles
 
 Note: Each respondent could select multiple meeting styles
 

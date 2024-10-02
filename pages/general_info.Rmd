@@ -1,0 +1,24 @@
+---
+title: "General Comments and Suggestions"
+output: html_document
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(kableExtra)
+```
+
+## General Suggestions
+
+`r data.frame(df$GenSuggestions[df$GenSuggestions %>% str_detect("meeting time|conflict")]) %>% drop_na() %>% nrow()` out of `r nrow(df %>% select(GenSuggestions) %>% drop_na())` the general suggestions/comments mentioned a time conflict.
+
+The remaining comments/suggestions are below.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+suggestionsAndComments <- df %>% select(GenSuggestions) %>% drop_na() %>%
+  filter(!str_detect(GenSuggestions, "meeting time|conflict")) %>%
+  mutate(GenSuggestions = recode(GenSuggestions, "My previous life as a teacher suggests interactive techniques/activities to stimulate engagement. Common techniques (think, pair share) with breakout rooms, (task, target, time) using resources like Jamboards, I've adapted this for ideation meetings with some success in our group. Ps. Thanks for organizing and facilitating!" = "Incorporate interactive techniques/activities like think ,pair, share or task, target, time using breakout rooms and Jamboards to stimulate engagement", "In-depth presentations or discussions that give practical information, rather than just surface-level presentations, would be much more useful and interesting to me." = "In-depth presentations or discussions with practical information rather than surface-level presentations")) %>% `colnames<-`(c("Any general suggestions?"))
+
+kableExtra::kable(suggestionsAndComments, table.attr = "style='width:20%;'")
+```
+
