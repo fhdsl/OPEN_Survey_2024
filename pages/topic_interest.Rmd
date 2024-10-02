@@ -5,6 +5,8 @@ output: html_document
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
+library(magrittr)
+library(kableExtra)
 ```
 
 
@@ -32,6 +34,43 @@ df %>% select(InterestCustomAITool, CombinedInterestAIPolicy, CombinedInterestEt
 ```
 
 # Respondent provided suggestions
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width = , fig.height = }
+userSpecifiedTOI <- df %>% select(TopicsOfInterest) %>%
+    mutate(TopicsOfInterest = recode(TopicsOfInterest, "Not sure" = NA_character_)) %>% #change Not sure to NA
+    filter(!str_detect(TopicsOfInterest, "but")) %>% #remove not suggestions
+    drop_na() %>% #drop the NA I introduced
+    separate_longer_delim(TopicsOfInterest, delim = "; ") 
+
+expanded <- rbind(
+                  userSpecifiedTOI %>%
+                    filter(!str_detect(TopicsOfInterest, ", ")), #already expanded because of separate_longer_delim with semicolon
+                  userSpecifiedTOI %>%
+                    filter(str_detect(TopicsOfInterest, ", ")) %>% 
+                    mutate(TopicsOfInterest = str_replace_all(TopicsOfInterest, "e.g.", "eg"), #remove extra periods so I can split on period
+                           TopicsOfInterest = str_replace_all(TopicsOfInterest, "eggement", "engagement")) %>% #fix spelling
+                    separate_longer_delim(TopicsOfInterest, delim=". ") %>% #split on end of thought
+                    separate_longer_delim(TopicsOfInterest, delim="?)") %>% #split on end of thought
+                    mutate_at(.vars = "TopicsOfInterest", .funs = trimws) %>% #remove white space delimiters 
+                    separate_longer_delim(TopicsOfInterest, delim=", ") %>% #split on commas within lists
+                    mutate(TopicsOfInterest = 
+                             recode(TopicsOfInterest, "Additionally" = NA_character_, #remove adverb
+                                                      "especially as these tools become more prevalent" = NA_character_, #remove extraneous description
+                                                      "I would also be interested in any discussions of AI-adjacent topics such as the ones mentioned below in the \"Would you be interested...\" question" = NA_character_)) %>% #not really a suggested/novel topic since already asked in survey
+                    drop_na() %>% #drop the NAs I introduced
+                    mutate(TopicsOfInterest = 
+                             recode(TopicsOfInterest, "git tools and patterns for branching/committing releases." = "Open Source software development strategies - git tools and patterns for branching/committing releases.", #add the original descriptor back
+                                                      "One idea is for another presentation on mentoring specifically undegaduates/trainees (I believe there might have been one in the past"= "mentoring specifically undergraduates/trainees", #simplify
+                                                      "or about how scientific education in the computational science sphere might evolve with the increase in generative AI tools (eg how they may hinder or enhance training)" = "how the increase in generative AI tools may hinder or enhance computational science training", #simplify
+                                                      "I think presentations on new \"trends\" in computational tools outside of AI might be useful: for instance" = "new trends in computational tools outside of AI", #simplify
+                                                      "a presentation dedicated to Jupyter Notebook-based resources" = "Jupyter Notebook-based resources", #simplify
+                                                      "or a presentation on how new technologies can improve existing tools (eg how Rust can be used to speed up tools likegeapy)" = "how new technologies can improve existing tools (eg how Rust can be used to speed up tools like gseapy)", #simplify
+                                                      "or current \"hot topics\" (eg knowleg graphs" = "knowledge graphs", #simplify
+                                                      "computer vision)" = "computer vision"))
+                  )
+
+kableExtra::kable(expanded, table.attr = "style='width:20%;'")
+```
 
 # Preferred Meeting Styles
 
