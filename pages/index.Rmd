@@ -1,5 +1,5 @@
 ---
-title: "**OPEN Survey 2024 Results**"
+title: "**About the OPEN Survey 2024**"
 output:
   html_document
 ---
@@ -8,8 +8,27 @@ output:
 Analysis results for the 2024 OPEN Survey  
 </div>
 
-### **About**
+## Design
 
-This website was created with the OTTR_Template_Website template.
+The ITCR Operations, Promotion, Education, and Networking (OPEN) group conducted a survey collecting responses from Feb 2024 - May 2024 asking ITCR members questions about previous and future OPEN group meeting topics and preferences. 20 responses were received, two of which were determined to be duplicates, leaving a total of **19 responses** used in the analysis. Questions asked about OPEN usefulness in general and for specific meetings from Jan 2023 - Jan 2024, future topic interest including interest in specific topics and suggestions for ideas and discussion leaders, and general suggestions. 
 
-The survey asked questions about ...
+## Results Summary
+
+* [Meeting Usefulness](https://hutchdatascience.org/OPEN_Survey_2024/meeting_usefulness.html)
+  * The majority of respondents found the OPEN group's activities and discussions to be mostly useful and generally engaging or very useful and highly engaging.
+  * The ITN education session on using Overleaf & LaTeX to write manuscripts, the research activity/discussion of Survey and ITCR tool characteristics/usage results, and the guest education session where guest speakers discussed their experience with user acceptance testing for scientific software were rated as the most useful previous OPEN meetings.
+  * Every previous meeting had a median rating of at least "Somewhat Useful" with most having median ratings between "Useful" and "Very Useful".
+* [Future Topic Interest](https://hutchdatascience.org/OPEN_Survey_2024/topic_interest.html)
+  * The majority of respondents responded that they might be or were interested in discussions on ethical usage and development of AI for scientific research, policy and regulation related to AI, and tools and infrastructure for building custom AI tools. One response distinctly specified that they were not interested in AI topics.
+  * Respondents provided numerous unique ideas for future topics and discussion leaders.
+  * The most preferred meeting topics were guest speakers about a topic or their research, discussions about a topic, or co-working on a project.
+* [General Suggestions](https://hutchdatascience.org/OPEN_Survey_2024/general_info.html)
+  * General comments and suggestions mentioned that time conflicts make it difficult for people to attend.
+  * Other general suggestions focused on meeting style.
+
+Click on each tab to learn more.
+
+### Attributions
+
+This website was created with the [OTTR_Template_Website template](https://github.com/jhudsl/OTTR_Template_Website/) and used [this guide to automate data import](https://www.avahoffman.com/GHA_and_googlesheets/).
+
