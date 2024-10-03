@@ -10,6 +10,8 @@ navbar:
     href: meeting_usefulness.html
   - text: Future Topic Interest
     href: topic_interest.html
+  - text: General Suggestions
+    href: general_info.html
 
 
 

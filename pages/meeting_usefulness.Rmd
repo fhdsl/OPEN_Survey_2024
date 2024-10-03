@@ -9,7 +9,7 @@ library(scales)
 ```
 
 
-# Usefulness of OPEN
+## Usefulness of OPEN
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width = 14.98, fig.height = 7.29}
 data.frame(table(df$ExtentUsefulEngaging)) %>%
@@ -33,7 +33,7 @@ data.frame(table(df$ExtentUsefulEngaging)) %>%
   ggtitle("To what extent have you found the OPEN group's\n activities and discussions to be useful and engaging?")
 ```
 
-# Specific OPEN meeting usefulness
+## Specific OPEN meeting usefulness
 
 <details><summary>Click here for definitions of the rating system</summary>
 
@@ -45,6 +45,8 @@ data.frame(table(df$ExtentUsefulEngaging)) %>%
 * 0 = did not attend meeting due to lack of interest
 
 </details>
+
+`r round(unlist(df %>% select(starts_with("HowUseful")) %>% unlist %>% table() %>% as.data.frame() %>% filter(. == "Did not attend; time conflict") %>% select("Freq") / length(df %>% select(starts_with("HowUseful")) %>% unlist) * 100, use.names = FALSE), digits=1)` percent of responses were "Did not attend due to a time conflict". The rest of the responses are used in the plot below.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width = 13.61, fig.height = 7.29}
 df %>% select(starts_with("HowUseful")) %>%

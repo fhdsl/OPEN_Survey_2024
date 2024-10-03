@@ -4,6 +4,7 @@ custimization
 cwrigh
 Dockerfile
 Dockerhub
+EHR
 favicon
 GH
 Github
@@ -11,9 +12,12 @@ GitHub
 HTTPS
 ITN
 ITCR
+interoperable
+Kawamoto
 lightblue
 lightgreen
 OTTR
+ottrproject
 Rmd
 repo
 subdir
@@ -23,5 +27,6 @@ www
 automations
 Bootstap
 glyphicons
+ReImagine
 repo
 RStudio
