@@ -1,5 +1,5 @@
 ---
-title: "**About the OPEN Survey 2024**"
+title: "About the OPEN Survey 2024"
 output:
   html_document
 ---
@@ -28,7 +28,7 @@ The ITCR Operations, Promotion, Education, and Networking (OPEN) group conducted
 
 Click on each tab to learn more.
 
-### Attributions
+## Attributions
 
 This website was created with the [OTTR_Template_Website template](https://github.com/jhudsl/OTTR_Template_Website/) and used [this guide to automate data import](https://www.avahoffman.com/GHA_and_googlesheets/).
 
