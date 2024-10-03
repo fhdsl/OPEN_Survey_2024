@@ -8,11 +8,11 @@ output:
 Analysis results for the 2024 OPEN Survey  
 </div>
 
-## Design
+### Design
 
 The ITCR Operations, Promotion, Education, and Networking (OPEN) group conducted a survey collecting responses from Feb 2024 - May 2024 asking ITCR members questions about previous and future OPEN group meeting topics and preferences. 20 responses were received, two of which were determined to be duplicates, leaving a total of **19 responses** used in the analysis. Questions asked about OPEN usefulness in general and for specific meetings from Jan 2023 - Jan 2024, future topic interest including interest in specific topics and suggestions for ideas and discussion leaders, and general suggestions. 
 
-## Results Summary
+### Results Summary
 
 * [Meeting Usefulness](https://hutchdatascience.org/OPEN_Survey_2024/meeting_usefulness.html)
   * The majority of respondents found the OPEN group's activities and discussions to be mostly useful and generally engaging or very useful and highly engaging.
@@ -28,7 +28,7 @@ The ITCR Operations, Promotion, Education, and Networking (OPEN) group conducted
 
 Click on each tab to learn more.
 
-## Attributions
+### Attributions
 
 This website was created with the [OTTR_Template_Website template](https://github.com/jhudsl/OTTR_Template_Website/) and used [this guide to automate data import](https://www.avahoffman.com/GHA_and_googlesheets/).
 
