@@ -9,7 +9,7 @@ library(kableExtra)
 ```
 
 
-`r data.frame(df$GenSuggestions[df$GenSuggestions %>% str_detect("meeting time|conflict")]) %>% drop_na() %>% nrow()` out of `r nrow(df %>% select(GenSuggestions) %>% drop_na())` the general suggestions/comments mentioned a time conflict.
+`r data.frame(df$GenSuggestions[df$GenSuggestions %>% str_detect("meeting time|conflict")]) %>% drop_na() %>% nrow()` out of `r nrow(df %>% select(GenSuggestions) %>% drop_na())` of the general suggestions/comments mentioned a time conflict.
 
 The remaining comments/suggestions are below.
 
