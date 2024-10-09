@@ -67,7 +67,9 @@ expanded <- rbind(
                                                       "a presentation dedicated to Jupyter Notebook-based resources" = "Jupyter Notebook-based resources", #simplify
                                                       "or a presentation on how new technologies can improve existing tools (eg how Rust can be used to speed up tools likegeapy)" = "how new technologies can improve existing tools (eg how Rust can be used to speed up tools like gseapy)", #simplify
                                                       "or current \"hot topics\" (eg knowleg graphs" = "knowledge graphs", #simplify
-                                                      "computer vision)" = "computer vision"))
+                                                      "computer vision)" = "computer vision"),
+                      TopicsOfInterest = na_if(TopicsOfInterest, "")) %>%
+                    drop_na()
                   )
 
 kableExtra::kable(expanded, table.attr = "style='width:20%;'")
