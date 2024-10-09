@@ -4,13 +4,9 @@ output:
   html_document
 ---
 
-<div class = "banner_color">
-Analysis results for the 2024 OPEN Survey  
-</div>
-
 ### Design
 
-The ITCR Operations, Promotion, Education, and Networking (OPEN) group conducted a survey collecting responses from Feb 2024 - May 2024 asking ITCR members questions about previous and future OPEN group meeting topics and preferences. 20 responses were received, two of which were determined to be duplicates, leaving a total of **19 responses** used in the analysis. Questions asked about OPEN usefulness in general and for specific meetings from Jan 2023 - Jan 2024, future topic interest including interest in specific topics and suggestions for ideas and discussion leaders, and general suggestions. 
+The ITCR Operations, Promotion, Education, and Networking (OPEN) group conducted a survey collecting responses from Feb 2024 - May 2024 asking ITCR members questions about previous and future OPEN group meeting topics and preferences. 20 responses were received, two of which were determined to be duplicates, leaving a total of **19 responses** used in the analysis. Questions asked about OPEN usefulness in general and for specific meetings from Jan 2023 - Jan 2024, future topic interest including interest in specific topics and suggestions for ideas and discussion leaders, and general suggestions.
 
 ### Results Summary
 
@@ -31,4 +27,3 @@ Click on each tab to learn more.
 ### Attributions
 
 This website was created with the [OTTR_Template_Website template](https://github.com/jhudsl/OTTR_Template_Website/) and used [this guide to automate data import](https://www.avahoffman.com/GHA_and_googlesheets/).
-
