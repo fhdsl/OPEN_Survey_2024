@@ -58,7 +58,8 @@ expanded <- rbind(
                                                       "especially as these tools become more prevalent" = NA_character_, #remove extraneous description
                                                       "I would also be interested in any discussions of AI-adjacent topics such as the ones mentioned below in the \"Would you be interested...\" question" = NA_character_)) %>% #not really a suggested/novel topic since already asked in survey
                     drop_na() %>% #drop the NAs I introduced
-                    mutate(TopicsOfInterest = 
+                    mutate(TopicsOfInterest = str_trim(TopicsOfInterest),
+                      TopicsOfInterest = 
                              recode(TopicsOfInterest, "git tools and patterns for branching/committing releases." = "Open Source software development strategies - git tools and patterns for branching/committing releases.", #add the original descriptor back
                                                       "One idea is for another presentation on mentoring specifically undegaduates/trainees (I believe there might have been one in the past"= "mentoring specifically undergraduates/trainees", #simplify
                                                       "or about how scientific education in the computational science sphere might evolve with the increase in generative AI tools (eg how they may hinder or enhance training)" = "how the increase in generative AI tools may hinder or enhance computational science training", #simplify
@@ -66,7 +67,9 @@ expanded <- rbind(
                                                       "a presentation dedicated to Jupyter Notebook-based resources" = "Jupyter Notebook-based resources", #simplify
                                                       "or a presentation on how new technologies can improve existing tools (eg how Rust can be used to speed up tools likegeapy)" = "how new technologies can improve existing tools (eg how Rust can be used to speed up tools like gseapy)", #simplify
                                                       "or current \"hot topics\" (eg knowleg graphs" = "knowledge graphs", #simplify
-                                                      "computer vision)" = "computer vision"))
+                                                      "computer vision)" = "computer vision"),
+                      TopicsOfInterest = na_if(TopicsOfInterest, "")) %>%
+                    drop_na()
                   )
 
 kableExtra::kable(expanded, table.attr = "style='width:20%;'")
@@ -78,7 +81,8 @@ kableExtra::kable(expanded, table.attr = "style='width:20%;'")
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 BeingGuest <- df %>% select(BeingGuestInterest) %>% 
-       mutate(BeingGuestInterest = recode(BeingGuestInterest, "No" = NA_character_, "I might be interested in presenting on software quality, and general software development practices topics." = "Software quality and general software development practices", "I would be happy to discuss data provenance and bioinformatic data reproducibility" = "Data provenance and bioinformatic data reproducibility", "Yes, guest discussion leader. I would like to talk about tools and platforms to encourage user engagement, develop tutorials and FAIR content development for long term usage (https://elixir-europe-training.github.io/ELIXIR-TrP-FAIR-training-handbook/)" = "Tools and platforms to encourage user engagement, develop tutorials and FAIR content development for long term usage")) %>%
+       mutate(BeingGuestInterest = str_trim(BeingGuestInterest),
+              BeingGuestInterest = recode(BeingGuestInterest, "No" = NA_character_, "I might be interested in presenting on software quality, and general software development practices topics." = "Software quality and general software development practices", "I would be happy to discuss data provenance and bioinformatic data reproducibility" = "Data provenance and bioinformatic data reproducibility", "Yes, guest discussion leader. I would like to talk about tools and platforms to encourage user engagement, develop tutorials and FAIR content development for long term usage (https://elixir-europe-training.github.io/ELIXIR-TrP-FAIR-training-handbook/)" = "Tools and platforms to encourage user engagement, develop tutorials and FAIR content development for long term usage")) %>%
        filter(!is.na(BeingGuestInterest))
 
 kableExtra::kable(BeingGuest, table.attr = "style='width:20%;'")
